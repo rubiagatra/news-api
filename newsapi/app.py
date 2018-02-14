@@ -13,11 +13,6 @@ def create_app():
 
     JWT(app, authenticate, identity)
 
-    @app.before_first_request
-    def initiate_mongodb():
-        create_user()
-
-
     api = Api(app)
     api.add_resource(Home, '/') 
 
