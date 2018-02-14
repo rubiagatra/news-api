@@ -1,1 +1,1 @@
-from ner_api.home.views import HelloWorld
+from newsapi.home.views import Home

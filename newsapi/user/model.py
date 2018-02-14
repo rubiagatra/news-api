@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 import json
 
-MONGO_URI = 'mongo'
+MONGO_URI = 'localhost'
 
 
 class UserModel:
@@ -14,7 +14,7 @@ class UserModel:
     @classmethod
     def find_by_username(cls, username):
         client = MongoClient(MONGO_URI,27017)
-        db = client['ner-api']
+        db = client['news-api']
         collection = db['user']
         result = collection.find_one({'username': username}) 
         if result:
@@ -28,7 +28,7 @@ class UserModel:
     @classmethod
     def find_by_id(cls, _id):
         client = MongoClient(MONGO_URI, 27017)
-        db = client['ner-api']
+        db = client['news-api']
         collection = db['user']
         result = collection.find_one({'_id': _id}) 
         if result:

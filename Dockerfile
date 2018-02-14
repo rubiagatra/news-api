@@ -10,6 +10,6 @@ COPY . .
 RUN pip install -r requirements.txt
 EXPOSE 5000
 
-CMD gunicorn -b 0.0.0.0:5000  --access-logfile - "news.app:create_app()
+CMD gunicorn -b 0.0.0.0:5000  --access-logfile - "newsapi.app:create_app()"
 
 

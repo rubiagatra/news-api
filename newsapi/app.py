@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_restful import Api
-from newsapi.home import HelloWorld
+from newsapi.home import Home 
 from flask_jwt import JWT
 from newsapi.security import authenticate, identity
 from newsapi.db import create_user
@@ -19,6 +19,6 @@ def create_app():
 
 
     api = Api(app)
-    api.add_resource(HelloWorld, '/') 
+    api.add_resource(Home, '/') 
 
     return app

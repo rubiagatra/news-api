@@ -1,1 +1,1 @@
-from ner_api.user.model import UserModel
+from newsapi.user.model import UserModel
