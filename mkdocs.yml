@@ -1,0 +1,3 @@
+site_name: News API Documentation
+theme:
+  name: 'material'

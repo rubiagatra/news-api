@@ -1,3 +1,11 @@
+config/__pycache__/
+instance/__pycache__/
+newsapi/home/__pycache__/
+newsapi/news/__pycache__/
+newsapi/news_status/__pycache__/
+newsapi/news_topic/__pycache__/
+.vscode/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

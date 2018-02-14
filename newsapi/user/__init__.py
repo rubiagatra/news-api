@@ -1,0 +1,1 @@
+from ner_api.user.model import UserModel

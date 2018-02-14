@@ -1,0 +1,13 @@
+# Using Python 3.6.4
+
+Flask==0.12.2
+Flask-JWT==0.3.2
+Flask-RESTful==0.3.6
+pymongo==3.6.0
+gunicorn==19.7.1
+
+# We are using pytest-flask for Testing
+
+# If you want to read the documentation please install mkdocks
+# mkdocs==0.17.2
+# mkdocs-material==2.6.0

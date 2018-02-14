@@ -1,0 +1,23 @@
+version: '2'
+services:
+  api:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - '.:/news-api'
+    command: >
+      gunicorn -b 0.0.0.0:5000
+        --access-logfile -
+        --reload
+        "newsapi.app:create_app()" 
+    links:
+      - mongo 
+    depends_on:
+      - mongo 
+
+  mongo:
+    image: mongo:3.6
+    ports:            # DELETE PORTS FOR PRODUCTION
+      - "27017:27017" 
+    
