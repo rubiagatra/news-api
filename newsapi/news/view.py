@@ -1,15 +1,25 @@
-from flask_restful import Resource
+from flask_restful import Resource, reqparse
 from pymongo import MongoClient
 from newsapi.news import NewsModel
 
 
 class News(Resource):
+    parser = reqparse.RequestParser()
+    parser.add_argument('status', type=str, required=True,  
+                        help="status = ['draft', 'publish', 'deleted']")
+    parser.add_argument('topic', type=str, required=True,  
+                        help="Please Insert Your Topic")
+    parser.add_argument('title', type=str, required=True,
+                        help="Please enter your title")
 
     def get(self):
-        pass
+        return NewsModel.find_all_publish(), 200 
 
     def post(self):
-        pass
+        data = News.parser.parse_args()
+        news = NewsModel(status=data['status'], topic=data['topic'], title=data['title']) 
+        news.saveto_db()
+        return news.json(), 201
 
 
 class NewsItem(Resource):
