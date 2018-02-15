@@ -29,27 +29,39 @@ class News(Resource):
 
 class NewsItem(Resource):
 
-    def get(self, _id):
-        pass
+    def get(self, id):
+        result = NewsModel.find_by_id(id)
+        if result:
+            return result.json(), 200
+        else:
+            return {'news': 'News not found'}, 404
 
-    def put(self, _id):
-        pass
 
-    def delete(self, _id):
+    def put(self, id):
+        result = NewsModel.find_by_id(id)
+        if result:
+            pass
+        pass
+            
+
+    def delete(self, id):
         pass
 
 class NewsTopic(Resource):
 
     def get(self, topic):
-
-        if not topic:
-            pass
+        result = NewsModel.find_by_topic(topic)
+        if result:
+            return result, 200 
+        return {'topic': 'topic was not found'}, 404
     
 
 class NewsStatus(Resource):
 
     def get(self, status):
-
-        if not status:
-            pass
+        result = NewsModel.find_by_status(status)
+        if result:
+            return result, 200
+        return {status: "news with {} status was not found".format(status)}, 404    
+            
         

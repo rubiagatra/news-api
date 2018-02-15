@@ -23,7 +23,7 @@ def create_app():
     api = Api(app)
     api.add_resource(Home, '/') 
     api.add_resource(News, '/api/news')
-    api.add_resource(NewsItem, '/api/news/<int:_id>' )
+    api.add_resource(NewsItem, '/api/news/<int:id>' )
     api.add_resource(NewsTopic, '/api/news/topic/<string:topic>' )
     api.add_resource(NewsStatus, '/api/news/status/<string:status>' )
 
