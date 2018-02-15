@@ -2,8 +2,6 @@ from pymongo import MongoClient
 import json
 from newsapi.database import mongo
 
-MONGO_URI = 'localhost'
-
 
 class UserModel:
 

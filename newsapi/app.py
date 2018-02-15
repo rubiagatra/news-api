@@ -12,7 +12,6 @@ def create_app(settings_override=None):
     
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object('config.settings')
-    app.config.from_pyfile('settings.py', silent=True)
 
     if settings_override:
         app.config.update(settings_override)
@@ -28,7 +27,7 @@ def create_app(settings_override=None):
         mongo.db.user.insert_one({'_id': 1, "username": "sandbox", "password": "sandbox"})
 
     api = Api(app)
-    api.add_resource(Home, '/') 
+    api.add_resource(Home, '/', endpoint='home') 
     api.add_resource(News, '/api/news')
     api.add_resource(NewsItem, '/api/news/<int:id>' )
     api.add_resource(NewsTopic, '/api/news/topic/<string:topic>' )
