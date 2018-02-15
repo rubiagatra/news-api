@@ -13,7 +13,7 @@ def create_app():
     app.config.from_object('config.settings')
     app.config.from_pyfile('settings.py', silent=True)
 
-    JWT(app, authenticate, identity)
+    jwt = JWT(app, authenticate, identity)
 
     @app.before_first_request
     def initiate_mongodb():
@@ -23,7 +23,7 @@ def create_app():
     api = Api(app)
     api.add_resource(Home, '/') 
     api.add_resource(News, '/api/news')
-    api.add_resource(NewsItem, '/api/news/<integer:_id>' )
+    api.add_resource(NewsItem, '/api/news/<int:_id>' )
     api.add_resource(NewsTopic, '/api/news/topic/<string:topic>' )
     api.add_resource(NewsStatus, '/api/news/status/<string:status>' )
 

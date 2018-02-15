@@ -5,6 +5,7 @@ MONGO_URI = 'localhost'
 class NewsModel:
 
     def __init__(self, status, topic, title):
+        self._id = None
         self.status = status
         self.topic = topic
         self.title = title
@@ -18,11 +19,14 @@ class NewsModel:
         collection_news = db['news']
         if type(self.topic) is str:
             self.topic = [self.topic]
-        collection_news.insert({'status': self.status, 'topic': self.topic, 'title': self.title})
+        data = collection_news.insert({'_id': new_count, 'status': self.status,
+                                'topic': self.topic, 'title': self.title})
+        self._id = data
         client.close()
 
     def json(self):
-        return {'news': {'topic': self.topic, 'status': self.topic, 'title':self.title}}
+        return {'news': {'_id': self._id,
+                        'topic': self.topic, 'status': self.status, 'title':self.title}}
 
     @classmethod
     def find_all_publish(cls):
