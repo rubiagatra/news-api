@@ -8,7 +8,7 @@ from flask_jwt import jwt_required
 class News(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('status', type=str, required=True,  
-                        help="status = ['draft', 'publish', 'deleted']")
+                        help="status = ['draft', 'publish']")
     parser.add_argument('topic', type=str, required=True,  
                         help="Please Insert Your Topic")
     parser.add_argument('title', type=str, required=True,
@@ -38,14 +38,35 @@ class NewsItem(Resource):
 
 
     def put(self, id):
+        parser = reqparse.RequestParser()
+        parser.add_argument('status', type=str,   
+                        help="status = ['draft', 'publish']")
+        parser.add_argument('topic', type=str,   
+                        help="Please Insert Your Topic")
+        parser.add_argument('title', type=str, 
+                        help="Please enter your title") 
+        data = News.parser.parse_args()
+        topic = request.json['topic']
         result = NewsModel.find_by_id(id)
         if result:
-            pass
-        pass
-            
+            if topic:
+                result.topic = topic
+            if data['status']:
+                result.status = data['status']
+            if data['title']:
+                result.title = data['title']
+            result.update_db()
+            return result.json()
+        return {'news': 'news not found'}, 404            
 
     def delete(self, id):
-        pass
+        result = NewsModel.find_by_id(id)
+        if result:
+            result.delete()
+            return {'news': 'News was deleted'}, 200
+        else:
+            return {'news': 'News was not found'}, 404
+
 
 class NewsTopic(Resource):
 

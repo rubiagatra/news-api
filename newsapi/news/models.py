@@ -17,8 +17,6 @@ class NewsModel:
         new_count = count + 1
         db['counter'].find_and_modify({"count": count}, {"count": new_count})
         collection_news = db['news']
-        if type(self.topic) is str:
-            self.topic = [self.topic]
         data = collection_news.insert({'_id': new_count, 'status': self.status,
                                 'topic': self.topic, 'title': self.title})
         self._id = data
@@ -69,4 +67,20 @@ class NewsModel:
         if result:
             return {status: result}
         return None
-   
+
+    def update_db(self, id):
+        client = MongoClient(MONGO_URI, 27017)
+        db = client['news-api']
+        collection = db['news']
+        collection.find_one_and_update(filter={"_id": id}, 
+                                       update={'$set' : {'title': self.title,
+                                                        'topic':self.topic, 'status': self.status}})
+        client.close()
+
+    def delete(self, id):
+        client = MongoClient(MONGO_URI, 27017)
+        db = client['news-api']
+        collection = db ['news']
+        collection.find_one_and_delete({'_id': id})
+        client.close()
+
