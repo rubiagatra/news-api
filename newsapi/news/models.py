@@ -68,19 +68,19 @@ class NewsModel:
             return {status: result}
         return None
 
-    def update_db(self, id):
+    def update_db(self):
         client = MongoClient(MONGO_URI, 27017)
         db = client['news-api']
         collection = db['news']
-        collection.find_one_and_update(filter={"_id": id}, 
+        collection.find_one_and_update(filter={"_id": self.id}, 
                                        update={'$set' : {'title': self.title,
                                                         'topic':self.topic, 'status': self.status}})
         client.close()
 
-    def delete(self, id):
+    def delete(self):
         client = MongoClient(MONGO_URI, 27017)
         db = client['news-api']
         collection = db ['news']
-        collection.find_one_and_delete({'_id': id})
+        collection.find_one_and_delete({'_id': self.id})
         client.close()
 

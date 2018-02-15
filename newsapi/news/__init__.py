@@ -1,1 +1,1 @@
-from newsapi.news.model import NewsModel
+from newsapi.news.models import NewsModel

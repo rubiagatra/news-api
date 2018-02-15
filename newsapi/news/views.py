@@ -28,7 +28,14 @@ class News(Resource):
 
 
 class NewsItem(Resource):
-
+    parser = reqparse.RequestParser()
+    parser.add_argument('status', type=str, required=False,  
+                        help="status = ['draft', 'publish']")
+    parser.add_argument('topic', type=str, required=False,   
+                        help="Please Insert Your Topic")
+    parser.add_argument('title', type=str, required=False, 
+                        help="Please enter your title") 
+    
     def get(self, id):
         result = NewsModel.find_by_id(id)
         if result:
@@ -38,15 +45,9 @@ class NewsItem(Resource):
 
 
     def put(self, id):
-        parser = reqparse.RequestParser()
-        parser.add_argument('status', type=str,   
-                        help="status = ['draft', 'publish']")
-        parser.add_argument('topic', type=str,   
-                        help="Please Insert Your Topic")
-        parser.add_argument('title', type=str, 
-                        help="Please enter your title") 
-        data = News.parser.parse_args()
-        topic = request.json['topic']
+        
+        data = NewsItem.parser.parse_args()
+        topic = request.json.get('topic', None)
         result = NewsModel.find_by_id(id)
         if result:
             if topic:
