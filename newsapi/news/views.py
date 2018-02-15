@@ -8,7 +8,7 @@ from flask_jwt import jwt_required
 class News(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('status', type=str, required=True,  
-                        help="status = ['draft', 'publish']")
+                        help="status = 'draft' or 'publish'")
     parser.add_argument('topic', type=str, required=True,  
                         help="Please Insert Your Topic")
     parser.add_argument('title', type=str, required=True,
@@ -30,7 +30,7 @@ class News(Resource):
 class NewsItem(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('status', type=str, required=False,  
-                        help="status = ['draft', 'publish']")
+                        help="status = 'draft'or 'publish'")
     parser.add_argument('topic', type=str, required=False,   
                         help="Please Insert Your Topic")
     parser.add_argument('title', type=str, required=False, 
