@@ -1,10 +1,12 @@
 from pymongo import MongoClient
 import json
+from newsapi.app import db
 
-MONGO_URI = 'localhost'
 
-
-class UserModel:
+class UserModel(db.Document):
+    _id = db.IntField()
+    username = db.StringField()
+    password = db.StringField()
 
     def __init__(self, _id, username, password):
         self.id = _id
@@ -13,28 +15,18 @@ class UserModel:
 
     @classmethod
     def find_by_username(cls, username):
-        client = MongoClient(MONGO_URI,27017)
-        db = client['news-api']
-        collection = db['user']
-        result = collection.find_one({'username': username}) 
         if result:
             user = cls(_id=result['_id'], username=result['username'], password=result['password'])
         else:
             user = None
 
-        client.close()
         return user
 
     @classmethod
     def find_by_id(cls, _id):
-        client = MongoClient(MONGO_URI, 27017)
-        db = client['news-api']
-        collection = db['user']
-        result = collection.find_one({'_id': _id}) 
         if result:
             user = cls(_id=result['_id'], username=result['username'], password=result['password'])
         else:
             user = None
 
-        client.close()
         return user
