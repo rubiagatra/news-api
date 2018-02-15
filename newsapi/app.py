@@ -3,7 +3,6 @@ from flask_restful import Api
 from newsapi.home import Home 
 from flask_jwt import JWT
 from newsapi.security import authenticate, identity
-from newsapi.db import create_user
 from newsapi.news.views import News, NewsItem, NewsStatus, NewsTopic
 from newsapi.database import mongo
 from newsapi.user import UserModel
