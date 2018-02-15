@@ -6,6 +6,7 @@ from newsapi.security import authenticate, identity
 from newsapi.db import create_user
 from newsapi.news.views import News, NewsItem, NewsStatus, NewsTopic
 from newsapi.database import mongo
+from newsapi.user import UserModel
 
 
 def create_app():
@@ -20,8 +21,9 @@ def create_app():
 
     @app.before_first_request
     def initiate_mongodb():
-        create_user()
-
+        if UserModel.find_by_username('sandbox'):
+            return None 
+        mongo.db.user.insert_one({'_id': 1, "username": "sandbox", "password": "sandbox"})
 
     api = Api(app)
     api.add_resource(Home, '/') 
