@@ -5,6 +5,7 @@ from flask_jwt import JWT
 from newsapi.security import authenticate, identity
 from newsapi.db import create_user
 from newsapi.news.views import News, NewsItem, NewsStatus, NewsTopic
+from newsapi.database import mongo
 
 
 def create_app():
@@ -12,6 +13,8 @@ def create_app():
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object('config.settings')
     app.config.from_pyfile('settings.py', silent=True)
+
+    mongo.init_app(app)
 
     jwt = JWT(app, authenticate, identity)
 

@@ -1,0 +1,1 @@
+from newsapi.app import mongo
