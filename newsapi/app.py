@@ -4,6 +4,8 @@ from newsapi.home import Home
 from flask_jwt import JWT
 from newsapi.security import authenticate, identity
 from newsapi.db import create_user
+from newsapi.news.view import News, NewsItem, NewsStatus, NewsTopic
+
 
 def create_app():
     
@@ -20,5 +22,10 @@ def create_app():
 
     api = Api(app)
     api.add_resource(Home, '/') 
+    api.add_resource(News, '/api/news')
+    api.add_resource(NewsItem, '/api/news/<integer:_id>' )
+    api.add_resource(NewsTopic, '/api/news/topic/<string:topic>' )
+    api.add_resource(NewsStatus, '/api/news/status/<string:status>' )
+
 
     return app
