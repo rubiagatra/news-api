@@ -9,7 +9,8 @@ class AuthTest(unittest.TestCase):
     params = {
         'DEBUG': False,
         'TESTING': True,
-        'MONGO_DBNAME': 'testing'
+        'MONGO_DBNAME': 'testing',
+        'MONGO_HOST': 'localhost'
     }
 
     def setUp(self):
