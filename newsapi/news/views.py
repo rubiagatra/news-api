@@ -76,7 +76,7 @@ class NewsTopic(Resource):
         result = NewsModel.find_by_topic(topic)
         if result:
             return result, 200 
-        return {'topic': 'topic was not found'}, 404
+        return {topic: 'topic was not found'}, 404
     
 
 class NewsStatus(Resource):
