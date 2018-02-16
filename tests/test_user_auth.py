@@ -22,10 +22,14 @@ class AuthTest(unittest.TestCase):
         client.drop_database(AuthTest.params['MONGO_DBNAME'])
         client.close()
 
-    def test_home_view(self):
-        response = self.app.get("/")
-        data = json.loads(response.get_data(as_text=True))
-        self.assertEqual(data, 'Please visit our documentation kumparan.aifor.fun/docs')
+    def auth(self, username, password):
+        return self.app.post('/auth', data=dict(
+            username=username,
+            password=password
+        ))
 
-    def test_home_response_code(self):
-        response = self.app.get("/")
+    def test_token_not_empty(self):
+        response = self.auth('sandbox', 'sandbox')
+        data = json.loads(response.get_data())
+        self.assertNotEqual(data['access_token'], None)
+        
