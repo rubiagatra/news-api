@@ -31,8 +31,8 @@ class NewsTest(unittest.TestCase):
         client.drop_database(NewsTest.params['MONGO_DBNAME'])
         client.close()
 
-    def put_news(self, id, status=None, topic=None, title=None):
-        return self.app.put('/api/news/'+ id, data=json.dumps(dict(
+    def put_news_by_id(self, id, status=None, topic=None, title=None):
+        return self.app.put('/api/news/'+ str(id), data=json.dumps(dict(
             status=status,
             topic=topic,
             title=title
@@ -80,3 +80,29 @@ class NewsTest(unittest.TestCase):
         response = self.delete_news_by_id(2)
         data = json.loads(response.get_data(as_text=True))
         self.assertEqual(data['news'], 'News was not found')
+
+    def test_put_news_by_id_not_found(self):
+        self.post_news("publish", "car",  "New Car Released this Month")
+        response = self.put_news_by_id(2)
+        data = json.loads(response.get_data(as_text=True))
+        self.assertEqual(data['news'], 'News was not found')
+
+    def test_put_one_status_news_by_id(self):
+        self.post_news("publish", "car",  "New Car Released this Month")
+        response = self.put_news_by_id(1, status='draft')
+        data = json.loads(response.get_data(as_text=True))
+        self.assertEqual(data['news']['status'], 'draft')
+
+    def test_put_one_topic_news_by_id(self):
+        self.post_news("publish", "car",  "New Car Released this Month")
+        response = self.put_news_by_id(1, topic='auto')
+        data = json.loads(response.get_data(as_text=True))
+        self.assertEqual(data['news']['topic'], 'auto')
+
+    def test_put_one_title_news_by_id(self):
+        self.post_news("publish", "car",  "New Car Released this Month")
+        response = self.put_news_by_id(1, title='Honda just Launch a Car')
+        data = json.loads(response.get_data(as_text=True))
+        self.assertEqual(data['news']['title'], 'Honda just Launch a Car')
+
+    

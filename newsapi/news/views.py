@@ -59,7 +59,7 @@ class NewsItem(Resource):
                 result.title = data['title']
             result.update_db()
             return result.get_json()
-        return {'news': 'news not found'}, 404            
+        return {'news': 'News was not found'}, 404            
 
     @jwt_required()
     def delete(self, id):
