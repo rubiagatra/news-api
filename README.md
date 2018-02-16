@@ -1,4 +1,5 @@
 # News API 
+[img](https://travis-ci.org/rubiagatra/news-api.svg?branch=master)
 > Manage your news room easily 
 
 News API is a RESTful API app using Flask and MongoDB. Manage your news room based on your topics easily.
