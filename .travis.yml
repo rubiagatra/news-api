@@ -1,4 +1,5 @@
 language: python
+services: mongodb
 python:
   - "3.6.4"
 install:
@@ -6,4 +7,3 @@ install:
 # command to run tests
 script:
   - python -m unittest
-services: mongodb

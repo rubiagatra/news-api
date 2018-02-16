@@ -2,7 +2,7 @@ from newsapi.app import create_app
 import unittest
 import json
 from pymongo import MongoClient
-from config.settings import MONGO_HOST, MONGO_PORT
+from config.settings import MONGO_PORT
 
 class AuthTest(unittest.TestCase):
 
@@ -19,18 +19,6 @@ class AuthTest(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        client =  MongoClient(MONGO_HOST, MONGO_PORT)
+        client =  MongoClient(AuthTest.params['MONGO_HOST'], MONGO_PORT)
         client.drop_database(AuthTest.params['MONGO_DBNAME'])
         client.close()
-
-    def auth(self, username, password):
-        return self.app.post('/auth', data=dict(
-            username=username,
-            password=password
-        ))
-
-    def test_token_not_empty(self):
-        response = self.auth('sandbox', 'sandbox')
-        data = json.loads(response.get_data())
-        self.assertNotEqual(data['access_token'], None)
-        
