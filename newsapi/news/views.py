@@ -36,6 +36,7 @@ class NewsItem(Resource):
     parser.add_argument('title', type=str, required=False, 
                         help="Please enter your title") 
 
+    @jwt_required()
     def get(self, id):
         result = NewsModel.find_by_id(id)
         if result:
@@ -72,6 +73,7 @@ class NewsItem(Resource):
 
 class NewsTopic(Resource):
 
+    @jwt_required()
     def get(self, topic):
         result = NewsModel.find_by_topic(topic)
         if result:

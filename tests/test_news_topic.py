@@ -41,7 +41,10 @@ class NewsTest(unittest.TestCase):
                 'content-type': 'application/json'})
 
     def get_topic_news(self, topic):
-        return self.app.get('/api/news/topic/' + topic)
+        return self.app.get('/api/news/topic/' + topic, 
+                headers={
+                'Authorization': 'JWT ' + self.token,
+                'content-type': 'application/json'})
 
     def test_get_news_topic(self):
         self.post_news("publish", "car",  "New Car Released this Month")
