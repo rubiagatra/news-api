@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Get, Update, and Delete by id - News API Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Get, Update, and Delete by id";
+    var mkdocs_page_input_path = "crud.md";
+    var mkdocs_page_url = "/crud/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../home/" class="icon icon-home"> News API Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../home/">Docs</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../auth/">Auth</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../news/">News</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../filtertopic/">Filter News by Topic</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../filterstatus/">Filter News by Status</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Get, Update, and Delete by id</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#get-update-and-delete-news-by-id">Get, Update, and Delete News by id</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#get-news-by-id">Get News by id</a></li>
+        
+            <li><a class="toctree-l3" href="#update-a-news">Update A News</a></li>
+        
+            <li><a class="toctree-l3" href="#delete-news-by-id">Delete News by id</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../home/">News API Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../home/">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Get, Update, and Delete by id</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="get-update-and-delete-news-by-id">Get, Update, and Delete News by id</h1>
+<h2 id="get-news-by-id">Get News by id</h2>
+<p><strong>URL</strong> : <code>/api/news/&lt;int:id&gt;</code></p>
+<p><strong>Method</strong> : <code>GET</code></p>
+<p><strong>Auth required</strong> : YES </p>
+<p>Not Found Response</p>
+<p><strong>Condition</strong> : User can not see any News.</p>
+<p><strong>Code</strong> : <code>404 NOT FOUND</code></p>
+<p><strong>Content</strong> :</p>
+<pre><code class="json">{
+    &quot;news&quot;: &quot;News not found&quot;
+} 
+</code></pre>
+
+<p>Success Response</p>
+<p><strong>Condition</strong> : User can see one News.</p>
+<p><strong>Code</strong> : <code>200 OK</code></p>
+<p><strong>Content</strong> : </p>
+<pre><code class="json">{
+    &quot;news&quot;: {
+        &quot;id&quot;: 25,
+        &quot;topic&quot;: &quot;car&quot;,
+        &quot;status&quot;: &quot;publish&quot;,
+        &quot;title&quot;: &quot;New Car Released this Month&quot;
+    }
+}
+</code></pre>
+
+<p>Error Response</p>
+<p><strong>Condition</strong> : If Token is Expired.</p>
+<p><strong>Code</strong> : <code>401 UNAUTHORIZED</code></p>
+<p><strong>Content</strong> :</p>
+<pre><code class="json">{
+    &quot;description&quot;: &quot;Signature has expired&quot;,
+    &quot;error&quot;: &quot;Invalid token&quot;,
+    &quot;status_code&quot;: 401
+}    
+
+</code></pre>
+
+<p><strong>Condition</strong> : If there is not access token.</p>
+<p><strong>Code</strong> : <code>401 UNAUTHORIZED</code></p>
+<p><strong>Content</strong> :</p>
+<pre><code class="json">{
+    &quot;description&quot;: &quot;Request does not contain an access token&quot;,
+    &quot;error&quot;: &quot;Authorization Required&quot;,
+    &quot;status_code&quot;: 401
+}    
+
+</code></pre>
+
+<h2 id="update-a-news">Update A News</h2>
+<p>Update a news with title,status, and topic.</p>
+<p><strong>URL</strong> : <code>/api/news/&lt;int:id&gt;</code></p>
+<p><strong>Method</strong> : <code>PUT</code></p>
+<p><strong>Auth required</strong> : YES</p>
+<p><strong>Data constraints</strong></p>
+<pre><code class="json">{
+    &quot;status&quot;: &quot;[Status of the news draft/publish]&quot;,
+    &quot;topic&quot;: &quot;[Name or your topic can be more than one]&quot;,
+    &quot;title&quot;: &quot;[Name of your title]&quot;
+}
+</code></pre>
+
+<p><strong>Data Example</strong></p>
+<pre><code class="json">{
+    &quot;status&quot;: &quot;draft&quot;,
+    &quot;topic&quot;: &quot;car&quot;,
+    &quot;title&quot;: &quot;Tesla is the best car right now&quot;
+}
+</code></pre>
+
+<p>OR</p>
+<pre><code class="json">{
+    &quot;status&quot;: &quot;publish&quot;,
+    &quot;topic&quot;: [&quot;car&quot;, &quot;auto&quot;],
+    &quot;title&quot;: &quot;Tesla is the best car right now&quot;
+}
+</code></pre>
+
+<p>Success Response</p>
+<p><strong>Code</strong> : <code>200 OK</code> </p>
+<p><strong>Content example</strong></p>
+<pre><code class="json">{
+    &quot;news&quot;: {
+        &quot;id&quot;: 25,
+        &quot;topic&quot;: &quot;car&quot;,
+        &quot;status&quot;: &quot;publish&quot;,
+        &quot;title&quot;: &quot;Updated, Tesla New Car Released this Month&quot;
+    }
+}
+</code></pre>
+
+<p>Error Response</p>
+<p><strong>Condition</strong> : If Token is Expired.</p>
+<p><strong>Code</strong> : <code>401 UNAUTHORIZED</code></p>
+<p><strong>Content</strong> :</p>
+<pre><code class="json">{
+    &quot;description&quot;: &quot;Signature has expired&quot;,
+    &quot;error&quot;: &quot;Invalid token&quot;,
+    &quot;status_code&quot;: 401
+}    
+
+</code></pre>
+
+<p><strong>Condition</strong> : If there is not access token.</p>
+<p><strong>Code</strong> : <code>401 UNAUTHORIZED</code></p>
+<p><strong>Content</strong> :</p>
+<pre><code class="json">{
+    &quot;description&quot;: &quot;Request does not contain an access token&quot;,
+    &quot;error&quot;: &quot;Authorization Required&quot;,
+    &quot;status_code&quot;: 401
+}    
+
+</code></pre>
+
+<h2 id="delete-news-by-id">Delete News by id</h2>
+<p><strong>URL</strong> : <code>/api/news/&lt;int:id&gt;</code></p>
+<p><strong>Method</strong> : <code>DELETE</code></p>
+<p><strong>Auth required</strong> : YES </p>
+<p>Not Found Response</p>
+<p><strong>Condition</strong> : User can not see any News.</p>
+<p><strong>Code</strong> : <code>404 NOT FOUND</code></p>
+<p><strong>Content</strong> :</p>
+<pre><code class="json">{
+    &quot;news&quot;: &quot;News not found&quot;
+} 
+</code></pre>
+
+<p>Success Response</p>
+<p><strong>Condition</strong> : User deleted news.</p>
+<p><strong>Code</strong> : <code>200 OK</code></p>
+<p><strong>Content</strong> : </p>
+<pre><code class="json">{
+    &quot;news&quot;: {&quot;News was deleted&quot;}
+}
+</code></pre>
+
+<p>Error Response</p>
+<p><strong>Condition</strong> : If Token is Expired.</p>
+<p><strong>Code</strong> : <code>401 UNAUTHORIZED</code></p>
+<p><strong>Content</strong> :</p>
+<pre><code class="json">{
+    &quot;description&quot;: &quot;Signature has expired&quot;,
+    &quot;error&quot;: &quot;Invalid token&quot;,
+    &quot;status_code&quot;: 401
+}    
+
+</code></pre>
+
+<p><strong>Condition</strong> : If there is not access token.</p>
+<p><strong>Code</strong> : <code>401 UNAUTHORIZED</code></p>
+<p><strong>Content</strong> :</p>
+<pre><code class="json">{
+    &quot;description&quot;: &quot;Request does not contain an access token&quot;,
+    &quot;error&quot;: &quot;Authorization Required&quot;,
+    &quot;status_code&quot;: 401
+}    
+
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../filterstatus/" class="btn btn-neutral" title="Filter News by Status"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../filterstatus/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
+
+</body>
+</html>
