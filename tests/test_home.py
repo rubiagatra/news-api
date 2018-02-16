@@ -10,7 +10,7 @@ class HomeTest(unittest.TestCase):
         'DEBUG': False,
         'TESTING': True,
         'MONGO_DBNAME': 'testing',
-        'MONGO_HOST': 'localhost' 
+        'MONGO_HOST': 'localhost' #Using Your machine/travis for testing Delete this if using docker for testing 
     }
 
     def setUp(self):
