@@ -1,3 +1,10 @@
 site_name: News API Documentation
 theme:
-  name: 'material'
+  name: 'readthedocs'
+pages:
+- Docs: home.md
+- Auth: auth.md
+- News: news.md
+- Filter News by Topic: filtertopic.md
+- Filter News by Status: filterstatus.md
+- Get, Update, and Delete by id: crud.md

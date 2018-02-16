@@ -7,6 +7,6 @@ pymongo==3.6.0
 Flask-PyMongo==0.5.1
 gunicorn==19.7.1
 
-# If you want to read the documentation please install mkdocks
+# If you want to build the documentation please install mkdocks
 # mkdocs==0.17.2
 # mkdocs-material==2.6.0
