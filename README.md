@@ -21,6 +21,8 @@ docker-compose up
 
 ## Release History
 
+* 1.0.0
+    * First Release 
 * 0.1
     * Work in progress
 
