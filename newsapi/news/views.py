@@ -21,10 +21,10 @@ class News(Resource):
     @jwt_required()
     def post(self):
         data = News.parser.parse_args()
-        topic = request.json['topic']
+        topic = request.get_json()['topic']
         news = NewsModel(status=data['status'], topic=topic, title=data['title']) 
         news.saveto_db()
-        return news.json(), 201
+        return news.get_json(), 201
 
 
 class NewsItem(Resource):
@@ -35,19 +35,19 @@ class NewsItem(Resource):
                         help="Please Insert Your Topic")
     parser.add_argument('title', type=str, required=False, 
                         help="Please enter your title") 
-    
+
     def get(self, id):
         result = NewsModel.find_by_id(id)
         if result:
-            return result.json(), 200
+            return result.get_json(), 200
         else:
             return {'news': 'News not found'}, 404
 
-
+    @jwt_required()
     def put(self, id):
         
         data = NewsItem.parser.parse_args()
-        topic = request.json.get('topic', None)
+        topic = request.get_json().get('topic', None)
         result = NewsModel.find_by_id(id)
         if result:
             if topic:
@@ -57,9 +57,10 @@ class NewsItem(Resource):
             if data['title']:
                 result.title = data['title']
             result.update_db()
-            return result.json()
+            return result.get_json()
         return {'news': 'news not found'}, 404            
 
+    @jwt_required()
     def delete(self, id):
         result = NewsModel.find_by_id(id)
         if result:
@@ -80,6 +81,7 @@ class NewsTopic(Resource):
 
 class NewsStatus(Resource):
 
+    @jwt_required()
     def get(self, status):
         result = NewsModel.find_by_status(status)
         if result:

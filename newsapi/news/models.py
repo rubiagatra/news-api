@@ -1,7 +1,6 @@
 from pymongo import MongoClient
 from newsapi.database import mongo
 
-MONGO_URI = 'localhost'
 
 class NewsModel:
 
@@ -14,12 +13,12 @@ class NewsModel:
     def saveto_db(self):
         count = mongo.db.counter.find_one()['count']
         new_count = count + 1
-        mongo.db.counter.find_and_modify({"count": count}, {"count": new_count})
-        data = mongo.db.news.insert({'_id': new_count, 'status': self.status,
+        mongo.db.counter.find_one_and_update({"count": count}, {"$set":{"count": new_count}})
+        mongo.db.news.insert_one({'_id': new_count, 'status': self.status,
                                 'topic': self.topic, 'title': self.title})
-        self.id = data
+        self.id = mongo.db.news.find_one({'title': self.title})['_id']
 
-    def json(self):
+    def get_json(self):
         return {'news': {'id': self.id,
                         'topic': self.topic, 'status': self.status, 'title':self.title}}
 

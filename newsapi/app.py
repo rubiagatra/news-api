@@ -25,7 +25,8 @@ def create_app(settings_override=None):
         if UserModel.find_by_username('sandbox'):
             return None 
         mongo.db.user.insert_one({'_id': 1, "username": "sandbox", "password": "sandbox"})
-
+        mongo.db.counter.insert_one({'_id': 1, "name": "news", "count": 0})
+ 
     api = Api(app)
     api.add_resource(Home, '/', endpoint='home') 
     api.add_resource(News, '/api/news')

@@ -17,7 +17,12 @@ class AuthTest(unittest.TestCase):
         app = create_app(settings_override=AuthTest.params)
         self.app = app.test_client()
 
-    
+    @classmethod
+    def tearDownClass(cls):
+        client =  MongoClient(AuthTest.params['MONGO_HOST'], MONGO_PORT)
+        client.drop_database(AuthTest.params['MONGO_DBNAME'])
+        client.close()
+
     def auth(self, username, password):
         return self.app.post('/auth', data=json.dumps(dict(
             username=username,
